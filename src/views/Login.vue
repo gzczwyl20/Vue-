@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { login } from '@/api/index.js'
 export default {
   data () {
     return {
@@ -47,7 +48,21 @@ export default {
     submitForm (formname) {
       this.$refs[formname].validate(valid => {
         if (valid) {
-          console.log(123)
+          login(this.loginForm).then(res => {
+            console.log(res)
+            if (res.meta.status === 200) {
+              this.$message({
+                message: '登录成功',
+                type: 'success'
+              })
+              this.$router.push({name: 'home'})
+            } else {
+              this.$message({
+                message: '登录失败',
+                type: 'warning'
+              })
+            }
+          })
         } else {
           console.log(345)
           return false
