@@ -8,7 +8,7 @@ axios.defaults.baseURL = baseURL
 axios.interceptors.request.use(function (config) {
   // 在请求发送之前做某事
   let token = localStorage.getItem('mytoken')
-  if (!token) {
+  if (token) {
     config.headers['Authorization'] = token
   }
   return config
