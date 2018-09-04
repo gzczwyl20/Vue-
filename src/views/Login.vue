@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { login, getUserDate } from '@/api/index.js'
+import { login } from '@/api/index.js'
 export default {
   data () {
     return {
@@ -57,9 +57,6 @@ export default {
               })
               localStorage.setItem('mytoken', res.data.token)
               this.$router.push({ name: 'home' })
-              getUserDate({query: '', pagenum: 1, pagesize: 10}).then(res => {
-                console.log(res)
-              })
             } else {
               this.$message({
                 message: '登录失败',

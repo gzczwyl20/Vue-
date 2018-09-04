@@ -9,6 +9,21 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
+// 添加全局路由守卫
+router.beforeEach((to, from, next) => {
+  // ...
+  let token = localStorage.getItem('mytoken')
+  if (token) {
+    next()
+  } else {
+    if (to.path === '/login') {
+      next()
+    } else {
+      next({name: 'login'})
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
