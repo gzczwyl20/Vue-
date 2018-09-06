@@ -6,14 +6,14 @@
             <el-breadcrumb-item>用户管理</el-breadcrumb-item>
             <el-breadcrumb-item>用户列表</el-breadcrumb-item>
         </el-breadcrumb>
-        <!-- 搜索框 -->
+        <!-- 搜索框和添加用户 -->
         <div style="margin-top: 15px;margin-bottom: 15px">
             <el-input placeholder="请输入内容" v-model="input5" class="input-with-select" style="width:300px">
                 <el-button slot="append" icon="el-icon-search"></el-button>
             </el-input>
             <el-button type="success" plain>成功按钮</el-button>
         </div>
-        <!-- 表格 -->
+        <!-- 表格数据展示 -->
         <el-table :data="tableData" border style="width: 100%">
             <el-table-column type="index" width="50">
             </el-table-column>
@@ -44,10 +44,8 @@
             </el-table-column>
         </el-table>
         <!-- 分页 -->
-        <div class="block">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[1, 2, 3, 4]" :page-size="1" layout="total, sizes, prev, pager, next, jumper" :total='total'>
-            </el-pagination>
-        </div>
+        <el-pagination style="background-color:hotpink" @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[1, 2, 3, 4]" :page-size="1" layout="total, sizes, prev, pager, next, jumper" :total='total'>
+        </el-pagination>
     </div>
 </template>
 
@@ -55,20 +53,23 @@
 import { getUserDate } from '@/api/index.js'
 export default {
   methods: {
-    handleSizeChange (val) {
-      console.log(123)
-      console.log(val)
-      this.pagesize = val
-      getUserDate({ query: '', pagenum: 1, pagesize: val }).then(res => {
+    initPage () {
+      getUserDate({
+        query: this.query,
+        pagenum: this.pagenum,
+        pagesize: this.pagesize
+      }).then(res => {
         this.tableData = res.data.users
+        this.total = parseInt(res.data.total)
       })
     },
+    handleSizeChange (val) {
+      this.pagesize = val
+      this.initPage()
+    },
     handleCurrentChange (val) {
-      console.log(456)
-      console.log(val)
-      getUserDate({ query: '', pagenum: val, pagesize: this.pagesize }).then(res => {
-        this.tableData = res.data.users
-      })
+      this.pagenum = val
+      this.initPage()
     }
   },
   data () {
@@ -77,17 +78,13 @@ export default {
       value2: '',
       pagesize: 1,
       total: 0,
-      pagenum: '',
-      tableData: []
+      pagenum: 1,
+      tableData: [],
+      query: ''
     }
   },
   mounted () {
-    getUserDate({ query: '', pagenum: 1, pagesize: 1 }).then(res => {
-      console.log(res)
-      this.tableData = res.data.users
-      this.total = parseInt(res.data.total)
-      // console.log(this.total)
-    })
+    this.initPage()
   }
 }
 </script>
