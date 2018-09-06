@@ -59,3 +59,24 @@ export const deleteUser = (id) => {
     return res.data
   })
 }
+
+// 修改用户状态
+export const updateUser = (pa) => {
+  return axios.put(`users/${pa.id}/state/${pa.status}`).then(res => {
+    return res.data
+  })
+}
+
+// 获取角色列表
+export const getRolesList = () => {
+  return axios.get('roles').then(res => {
+    return res.data
+  })
+}
+
+// 分配用户角色
+export const allotRole = (pa) => {
+  return axios.put(`users/${pa.id}/role`, {rid: pa.rid}).then(res => {
+    return res.data
+  })
+}
