@@ -32,3 +32,23 @@ export const getUserDate = (params) => {
     return res.data
   })
 }
+
+// 用户添加接口
+export const addUser = (params) => {
+  return axios.post('users', params).then(res => {
+    return res.data
+  })
+}
+
+// 根据id查询数据
+export const getUserById = (id) => {
+  return axios.get(`users/${id}`).then(res => {
+    return res.data
+  })
+}
+// 编辑用户信息
+export const editUser = (id, params) => {
+  return axios.put(`users/${id}`, params).then(res => {
+    return res.data
+  })
+}
