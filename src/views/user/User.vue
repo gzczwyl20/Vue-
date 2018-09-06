@@ -38,7 +38,7 @@
                         <el-button type="success" icon="el-icon-share" plain></el-button>
                     </el-tooltip>
                     <el-tooltip content="删除" placement="top">
-                        <el-button type="danger" icon="el-icon-delete" plain></el-button>
+                        <el-button type="danger" icon="el-icon-delete" plain @click="deleteData(scope.row.id)"></el-button>
                     </el-tooltip>
                 </template>
             </el-table-column>
@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { getUserDate, addUser, getUserById, editUser } from '@/api/index.js'
+import { getUserDate, addUser, getUserById, editUser, deleteUser } from '@/api/index.js'
 export default {
   methods: {
     initPage () {
@@ -178,8 +178,29 @@ export default {
           })
         }
       })
+    },
+    deleteData (id) {
+      this.$confirm('此操作将永久删除id为' + id + '文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deleteUser(id).then(res => {
+          if (res.meta.status === 200) {
+            this.$message({
+              message: res.meta.msg,
+              type: 'success'
+            })
+            this.initPage()
+          } else {
+            this.$message({
+              message: res.meta.msg,
+              type: 'danger'
+            })
+          }
+        })
+      })
     }
-
   },
   data () {
     return {
