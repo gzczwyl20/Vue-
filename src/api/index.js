@@ -81,9 +81,23 @@ export const allotRole = (pa) => {
   })
 }
 
-// 分配用户角色
+// 角色权限列表
 export const getJurisdiction = (type) => {
   return axios.get(`rights/${type}`).then(res => {
+    return res.data
+  })
+}
+
+// 角色授权
+export const getRoleRight = (pa) => {
+  return axios.post(`roles/${pa.roleId}/rights`, {rids: pa.rids}).then(res => {
+    return res.data
+  })
+}
+
+// 删除指定角色的权限
+export const deleteRoleRight = (roleId, rightId) => {
+  return axios.delete(`roles/${roleId}/rights/${rightId}`).then(res => {
     return res.data
   })
 }
