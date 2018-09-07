@@ -94,7 +94,7 @@
         <el-form-item label="角色">
           <template>
             <el-select v-model="value" placeholder="请选择" @change="getgrantid">
-              <el-option v-for="item in options" :key="item.value" :label="item.roleName" :value="item.id">
+              <el-option v-for="item in options" :key="item.id" :label="item.roleName" :value="item.id">
               </el-option>
             </el-select>
           </template>

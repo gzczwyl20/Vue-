@@ -80,3 +80,10 @@ export const allotRole = (pa) => {
     return res.data
   })
 }
+
+// 分配用户角色
+export const getJurisdiction = (type) => {
+  return axios.get(`rights/${type}`).then(res => {
+    return res.data
+  })
+}
