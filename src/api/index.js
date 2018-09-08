@@ -101,3 +101,24 @@ export const deleteRoleRight = (roleId, rightId) => {
     return res.data
   })
 }
+
+// 添加角色
+export const AddRole = (pa) => {
+  return axios.post(`roles`, pa).then(res => {
+    return res.data
+  })
+}
+
+// 删除角色
+export const DeleteRole = (id) => {
+  return axios.delete(`roles/${id}`).then(res => {
+    return res.data
+  })
+}
+
+// 编辑角色
+export const UpdateRole = (pa) => {
+  return axios.put(`roles/${pa.id}`, pa).then(res => {
+    return res.data
+  })
+}

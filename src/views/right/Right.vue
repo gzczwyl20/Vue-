@@ -3,8 +3,8 @@
         <!-- 面包屑导航 -->
         <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-            <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+            <el-breadcrumb-item>角色列表</el-breadcrumb-item>
+            <el-breadcrumb-item>权限列表</el-breadcrumb-item>
         </el-breadcrumb>
         <!-- 内容 -->
         <el-table :data="tableData" border style="width: 100%">
