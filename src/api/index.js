@@ -129,3 +129,10 @@ export const getLeftMenus = () => {
     return res.data
   })
 }
+
+// 商品数据列表
+export const getGoodsList = (type) => {
+  return axios.get('categories', {params: {'type': type}}).then(res => {
+    return res.data
+  })
+}
