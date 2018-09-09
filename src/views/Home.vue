@@ -21,7 +21,7 @@
                     <span class="myicon myicon-menu toggle-btn" @click='iscollapse = !iscollapse'></span>
                     <span class="system-title">电商后台管理系统</span>
                     <div>
-                        <span class="welcome">你好:admin</span>
+                        <span class="welcome">你好:{{$store.state.username ? $store.state.username : $store.getters.username}}</span>
                         <el-button type="text" @click="loginOut">退出</el-button>
                     </div>
                 </el-header>

@@ -55,6 +55,8 @@ export default {
                 message: '登录成功',
                 type: 'success'
               })
+              // this.$store.state.username = res.data.username
+              this.$store.dispatch('setUsernameAction', res.data.username)
               localStorage.setItem('mytoken', res.data.token)
               this.$router.push({ name: 'home' })
             } else {
