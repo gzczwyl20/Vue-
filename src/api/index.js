@@ -122,3 +122,10 @@ export const UpdateRole = (pa) => {
     return res.data
   })
 }
+
+// 获取左侧菜单项权限
+export const getLeftMenus = () => {
+  return axios.get('menus').then(res => {
+    return res.data
+  })
+}
