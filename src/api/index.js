@@ -130,9 +130,30 @@ export const getLeftMenus = () => {
   })
 }
 
-// 商品数据列表
+// 商品分类数据列表
 export const getGoodsList = (type) => {
   return axios.get('categories', {params: {'type': type}}).then(res => {
+    return res.data
+  })
+}
+
+// 商品分类数据列表
+export const addCategories = (pa) => {
+  return axios.post('categories', pa).then(res => {
+    return res.data
+  })
+}
+
+// 商品数据列表
+export const getGoods = (pa) => {
+  return axios.get('goods', {params: pa}).then(res => {
+    return res.data
+  })
+}
+
+// 添加商品
+export const AddGoods = (pa) => {
+  return axios.post('goods', pa).then(res => {
     return res.data
   })
 }

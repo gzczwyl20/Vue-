@@ -8,6 +8,9 @@ import Roles from '@/views/right/Role.vue'
 import Goods from '@/views/goods/Goods.vue'
 import Params from '@/views/goods/Params.vue'
 import Categories from '@/views/goods/Categories.vue'
+import GoodsList from '@/views/goods/GoodsList.vue'
+import GoodsAdd from '@/views/goods/GoodsAdd.vue'
+import Reports from '@/views/reports/Reports.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -38,7 +41,20 @@ export default new Router({
     {
       path: 'goods',
       name: 'goods',
-      component: Goods
+      component: Goods,
+      redirect: {name: 'goodsList'},
+      children: [
+        {
+          path: 'goodsList',
+          name: 'goodsList',
+          component: GoodsList
+        },
+        {
+          path: 'goodsAdd',
+          name: 'goodsAdd',
+          component: GoodsAdd
+        }
+      ]
     },
     {
       path: 'params',
@@ -49,6 +65,11 @@ export default new Router({
       path: 'categories',
       name: 'categories',
       component: Categories
+    },
+    {
+      path: 'reports',
+      name: 'reports',
+      component: Reports
     }
     ]
   }

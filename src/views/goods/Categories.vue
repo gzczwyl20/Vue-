@@ -24,14 +24,14 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="addDialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="addDialogFormVisible = false">确 定</el-button>
+                <el-button type="primary" @click="AddCategories">确 定</el-button>
             </div>
         </el-dialog>
     </div>
 </template>
 
 <script>
-import { getGoodsList } from '@/api/index.js'
+import { getGoodsList, addCategories } from '@/api/index.js'
 import TreeGrid from '@/components/TreeGrid/TreeGrid.vue'
 export default {
   components: {
@@ -65,9 +65,8 @@ export default {
       },
       options: [],
       selectedOptions: [],
-      selectedOptions2: [],
       goosList: {
-        value: 'cat_pid',
+        value: 'cat_id',
         label: 'cat_name',
         children: 'children'
       }
@@ -97,7 +96,36 @@ export default {
     editCategory (cid) {
       console.log(cid)
     },
-    handleChange () {}
+    handleChange (v) {
+      console.log(v)
+    },
+    AddCategories () {
+      if (this.selectedOptions.length === 0) {
+        this.addform.cat_level = 0
+        this.addform.cat_pid = 0
+      } else if (this.selectedOptions.length === 1) {
+        this.addform.cat_level = 1
+        this.addform.cat_pid = this.selectedOptions[0]
+      } else if (this.selectedOptions.length === 2) {
+        this.addform.cat_level = 2
+        this.addform.cat_pid = this.selectedOptions[1]
+      }
+      addCategories(this.addform).then(res => {
+        if (res.meta.status === 201) {
+          this.$message({
+            message: res.meta.msg,
+            type: 'success'
+          })
+          this.initGoodsList()
+          this.addDialogFormVisible = false
+        } else {
+          this.$message({
+            message: res.meta.msg,
+            type: 'danger'
+          })
+        }
+      })
+    }
   }
 }
 </script>
